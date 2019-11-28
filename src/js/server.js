@@ -52,6 +52,7 @@ if (cluster.isMaster) {
   
     http.createServer((req, res) => {
         // Print infos
+        //res.writeHead(200, {"Content-Type": "text/plain"});
         res.writeHead(200);
         res.end(strFullLog);
     }).listen(8000);

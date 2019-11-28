@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/server.js"
+    "start": "nodemon ./src/js/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/olavomello/server_monitor.git"
+    "url": "git+https://github.com/olavomello/server-monitor.git"
   },
   "keywords": [
     "server",
@@ -17,11 +17,11 @@
     "uptime"
   ],
   "author": "Olavo Mello",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/olavomello/server_monitor/issues"
+    "url": "https://github.com/olavomello/server-monitor/issues"
   },
-  "homepage": "https://github.com/olavomello/server_monitor#readme",
+  "homepage": "https://github.com/olavomello/server-monitor#readme",
   "devDependencies": {
     "nodemon": "^2.0.1"
   }
