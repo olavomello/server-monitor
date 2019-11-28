@@ -9,18 +9,27 @@ const numMem        =   OS.freemem;
 const numUpTime     =   OS.uptime;
 const strPlataform  =   OS.platform;
 
+// Vars
+var strFullLog      =   "";
+
+// Function log
+function log( strLog ){
+    console.log(strLog);
+    strFullLog +=   strLog;
+}
+
 if (cluster.isMaster) {
     // Main cluster
-    console.log(`---------------------------------------`);
-    console.log(`              MONITORING               `);
-    console.log(`---------------------------------------`);
-    console.log(`Master ${process.pid} is running`);
-    console.log(`Host : ${hostName}`);
-    console.log(`CPUs : ${numCPUs}`);
-    console.log(`Memory : ${numMem} bytes`);
-    console.log(`UpTime : ${numUpTime} secs`);
-    console.log(`Platform : ${strPlataform}`);
-    console.log(`---------------------------------------`);
+    log(`---------------------------------------`);
+    log(`              MONITORING               `);
+    log(`---------------------------------------`);
+    log(`Master ${process.pid} is running`);
+    log(`Host : ${hostName}`);
+    log(`CPUs : ${numCPUs}`);
+    log(`Memory : ${numMem} bytes`);
+    log(`UpTime : ${numUpTime} secs`);
+    log(`Platform : ${strPlataform}`);
+    log(`---------------------------------------`);
 
     // Fork workers.
     for (let i = 0; i < numCPUs; i++) {
@@ -29,25 +38,24 @@ if (cluster.isMaster) {
 
     // Online
     cluster.on('online', (worker, code, signal) => {
-        console.log(`worker ${worker.process.pid} is online`);
+        log(`worker ${worker.process.pid} is online`);
     });
     // Online
     cluster.on('disconnect', (worker, code, signal) => {
-        console.log(`worker ${worker.process.pid} is offline`);
-    });    
-
+        log(`worker ${worker.process.pid} is offline`);
+    });   
     // On exit
     cluster.on('exit', (worker, code, signal) => {
-        console.log(`worker ${worker.process.pid} died`);
+        log(`worker ${worker.process.pid} died`);
     });
 } else {
   
     http.createServer((req, res) => {
         // Print infos
         res.writeHead(200);
-        res.end('hello world\n');
-  }).listen(8000);
+        res.end(strFullLog);
+    }).listen(8000);
 
   // Infos
-  console.log(`Worker ${process.pid} started`);
+  // console.log(`Worker ${process.pid} started`);
 }
